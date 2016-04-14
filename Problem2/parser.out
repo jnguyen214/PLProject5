@@ -1,0 +1,95 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> HEADER1
+Rule 2     start -> HEADER2
+Rule 3     start -> DATA float
+Rule 4     float -> INTEGER . INTEGER
+
+Terminals, with rules where they appear
+
+.                    : 4
+DATA                 : 3
+HEADER1              : 1
+HEADER2              : 2
+INTEGER              : 4 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+float                : 3
+start                : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . HEADER1
+    (2) start -> . HEADER2
+    (3) start -> . DATA float
+
+    HEADER1         shift and go to state 3
+    HEADER2         shift and go to state 1
+    DATA            shift and go to state 4
+
+    start                          shift and go to state 2
+
+state 1
+
+    (2) start -> HEADER2 .
+
+    $end            reduce using rule 2 (start -> HEADER2 .)
+
+
+state 2
+
+    (0) S' -> start .
+
+
+
+state 3
+
+    (1) start -> HEADER1 .
+
+    $end            reduce using rule 1 (start -> HEADER1 .)
+
+
+state 4
+
+    (3) start -> DATA . float
+    (4) float -> . INTEGER . INTEGER
+
+    INTEGER         shift and go to state 5
+
+    float                          shift and go to state 6
+
+state 5
+
+    (4) float -> INTEGER . . INTEGER
+
+    .               shift and go to state 7
+
+
+state 6
+
+    (3) start -> DATA float .
+
+    $end            reduce using rule 3 (start -> DATA float .)
+
+
+state 7
+
+    (4) float -> INTEGER . . INTEGER
+
+    INTEGER         shift and go to state 8
+
+
+state 8
+
+    (4) float -> INTEGER . INTEGER .
+
+    $end            reduce using rule 4 (float -> INTEGER . INTEGER .)
+
