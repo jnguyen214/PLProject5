@@ -22,12 +22,12 @@ t_ignore = " \r"
 def p_start(t):
     '''start : PROGRAM
              | country
-             | setting
+             
 
     '''
 
 def p_data(t):
-    'data : country INTEGER INTEGER INTEGER'
+    'data : country float INTEGER INTEGER'
     t[0] = str(t[1]) + str(t[2]) + str(t[3]) + str(t[4])
 
 def p_float(t):
